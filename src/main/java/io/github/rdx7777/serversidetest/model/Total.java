@@ -1,6 +1,7 @@
 package io.github.rdx7777.serversidetest.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Total {
 
@@ -14,6 +15,36 @@ public class Total {
 
     public static Total.Builder builder() {
         return new Total.Builder();
+    }
+
+    public BigDecimal getGross() {
+        return gross;
+    }
+
+    public BigDecimal getVat() {
+        return vat;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Total)) return false;
+        Total total = (Total) o;
+        return Objects.equals(gross, total.gross) &&
+            Objects.equals(vat, total.vat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gross, vat);
+    }
+
+    @Override
+    public String toString() {
+        return "Total{" +
+            "gross=" + gross +
+            ", vat=" + vat +
+            '}';
     }
 
     public static class Builder {

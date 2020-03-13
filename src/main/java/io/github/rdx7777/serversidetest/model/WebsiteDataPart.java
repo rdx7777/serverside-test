@@ -2,6 +2,7 @@ package io.github.rdx7777.serversidetest.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WebsiteDataPart {
 
@@ -9,13 +10,42 @@ public class WebsiteDataPart {
     private Total total;
 
     private WebsiteDataPart(Builder builder) {
-
         results = builder.results;
         total = builder.total;
     }
 
     public static WebsiteDataPart.Builder builder() {
         return new WebsiteDataPart.Builder();
+    }
+
+    public List<Product> getResults() {
+        return results;
+    }
+
+    public Total getTotal() {
+        return total;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WebsiteDataPart)) return false;
+        WebsiteDataPart that = (WebsiteDataPart) o;
+        return Objects.equals(results, that.results) &&
+            Objects.equals(total, that.total);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results, total);
+    }
+
+    @Override
+    public String toString() {
+        return "WebsiteDataPart{" +
+            "results=" + results +
+            ", total=" + total +
+            '}';
     }
 
     public static class Builder {
