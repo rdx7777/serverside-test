@@ -66,12 +66,12 @@ public class ApplicationService {
         }
         BigDecimal vat = gross.subtract(gross.divide(BigDecimal.valueOf(1.2), RoundingMode.valueOf(2)));
         Total total = Total.builder()
-            .withGross(gross)
-            .withVat(vat)
+            .gross(gross)
+            .vat(vat)
             .build();
         return Optional.of(WebsiteDataPart.builder()
-            .withResults(productList)
-            .withTotal(total)
+            .results(productList)
+            .total(total)
             .build());
     }
 
@@ -101,18 +101,18 @@ public class ApplicationService {
 
     private Product getProductWithEnergyInfo(String title, Integer kcal_per_100g, BigDecimal unit_price, String description) {
         return Product.builder()
-            .withTitle(title)
-            .withKcal_per_100g(kcal_per_100g)
-            .withUnit_price(unit_price)
-            .withDescription(description)
+            .title(title)
+            .kcal_per_100g(kcal_per_100g)
+            .unit_price(unit_price)
+            .description(description)
             .build();
     }
 
     private Product getProductWithoutEnergyInfo(String title, BigDecimal unit_price, String description) {
         return Product.builder()
-            .withTitle(title)
-            .withUnit_price(unit_price)
-            .withDescription(description)
+            .title(title)
+            .unit_price(unit_price)
+            .description(description)
             .build();
     }
 

@@ -15,10 +15,10 @@ public class ProductGenerator {
         String description = WordGenerator.getRandomWord();
 
         return Product.builder()
-            .withTitle(title)
-            .withKcal_per_100g(kcal_per_100g)
-            .withUnit_price(unit_price)
-            .withDescription(description)
+            .title(title)
+            .kcal_per_100g(kcal_per_100g)
+            .unit_price(unit_price)
+            .description(description)
             .build();
     }
 }

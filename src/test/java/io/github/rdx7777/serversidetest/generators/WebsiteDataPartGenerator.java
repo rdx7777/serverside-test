@@ -22,10 +22,10 @@ public class WebsiteDataPartGenerator {
         }
         BigDecimal vat = gross.subtract(gross.divide(BigDecimal.valueOf(1.2), RoundingMode.valueOf(2)));
         return WebsiteDataPart.builder()
-            .withResults(results)
-            .withTotal(Total.builder()
-                .withGross(gross)
-                .withVat(vat)
+            .results(results)
+            .total(Total.builder()
+                .gross(gross)
+                .vat(vat)
                 .build())
             .build();
     }
