@@ -20,7 +20,7 @@ public class WebsiteDataPartGenerator {
         for (int i = 0; i < 5; i++) {
             gross = gross.add(results.get(i).getUnit_price());
         }
-        BigDecimal vat = gross.divide(BigDecimal.valueOf(1.2), RoundingMode.valueOf(2));
+        BigDecimal vat = gross.subtract(gross.divide(BigDecimal.valueOf(1.2), RoundingMode.valueOf(2)));
         return WebsiteDataPart.builder()
             .withResults(results)
             .withTotal(Total.builder()

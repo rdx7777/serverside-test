@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Total {
 
-    private BigDecimal gross;
-    private BigDecimal vat;
+    private final BigDecimal gross;
+    private final BigDecimal vat;
 
     private Total(Builder builder) {
         gross = builder.gross;

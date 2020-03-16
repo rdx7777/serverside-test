@@ -1,7 +1,7 @@
 package io.github.rdx7777.serversidetest.controller;
 
 import io.github.rdx7777.serversidetest.model.WebsiteDataPart;
-import io.github.rdx7777.serversidetest.service.Service;
+import io.github.rdx7777.serversidetest.service.ApplicationService;
 import io.github.rdx7777.serversidetest.service.ServiceOperationException;
 
 import java.util.Optional;
@@ -18,19 +18,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/")
-public class Controller {
+public class ApplicationController {
 
-    private final Logger logger = LoggerFactory.getLogger(Controller.class);
+    private final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
-    private Service service;
+    private ApplicationService applicationService;
 
-    public Controller(Service service) {
-        this.service = service;
+    public ApplicationController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
     }
 
     @GetMapping(params = "address", produces = "application/json")
     public ResponseEntity<WebsiteDataPart> getData(@RequestParam("address") String address) throws ServiceOperationException {
-        Optional<WebsiteDataPart> dataPart = service.getData(address);
+        Optional<WebsiteDataPart> dataPart = applicationService.getData(address);
         if (dataPart.isEmpty()) {
             logger.error("Attempt to get website data by incorrect or non existing address.");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attempt to get website data by incorrect or non existing address.");

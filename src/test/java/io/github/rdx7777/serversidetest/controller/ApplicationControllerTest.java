@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.rdx7777.serversidetest.generators.WebsiteDataPartGenerator;
 import io.github.rdx7777.serversidetest.generators.WordGenerator;
 import io.github.rdx7777.serversidetest.model.WebsiteDataPart;
-import io.github.rdx7777.serversidetest.service.Service;
+import io.github.rdx7777.serversidetest.service.ApplicationService;
 import io.github.rdx7777.serversidetest.service.ServiceOperationException;
 
 import java.util.Optional;
@@ -24,11 +24,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(Controller.class)
-class ControllerTest {
+@WebMvcTest(ApplicationController.class)
+class ApplicationControllerTest {
 
     @MockBean
-    private Service service;
+    private ApplicationService applicationService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,7 +40,7 @@ class ControllerTest {
     public void shouldReturnData() throws Exception {
         WebsiteDataPart dataPart = WebsiteDataPartGenerator.getRandomWebsiteDataPart();
         String address = WordGenerator.getRandomWord();
-        when(service.getData(address)).thenReturn(Optional.of(dataPart));
+        when(applicationService.getData(address)).thenReturn(Optional.of(dataPart));
 
         String url = String.format("/?address=%s", address);
 
@@ -50,7 +50,7 @@ class ControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(content().json(mapper.writeValueAsString(dataPart)));
 
-        verify(service).getData(address);
+        verify(applicationService).getData(address);
     }
 
     @Test
@@ -64,7 +64,7 @@ class ControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound());
 
-        verify(service).getData(address);
+        verify(applicationService).getData(address);
     }
 
     @Test
@@ -77,13 +77,13 @@ class ControllerTest {
             .accept(MediaType.APPLICATION_XML))
             .andExpect(status().isNotAcceptable());
 
-        verify(service, never()).getData(address);
+        verify(applicationService, never()).getData(address);
     }
 
     @Test
     void shouldReturnInternalServerErrorDuringGettingDataWhenSomethingWentWrongOnServer() throws Exception {
         String address = WordGenerator.getRandomWord();
-        when(service.getData(address)).thenThrow(new ServiceOperationException());
+        when(applicationService.getData(address)).thenThrow(new ServiceOperationException());
 
         String url = String.format("/?address=%s", address);
 
@@ -92,6 +92,6 @@ class ControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError());
 
-        verify(service).getData(address);
+        verify(applicationService).getData(address);
     }
 }

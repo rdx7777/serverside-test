@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class WebsiteDataPart {
 
-    private List<Product> results;
-    private Total total;
+    private final List<Product> results;
+    private final Total total;
 
     private WebsiteDataPart(Builder builder) {
         results = builder.results;
@@ -49,6 +49,7 @@ public class WebsiteDataPart {
     }
 
     public static class Builder {
+
         private List<Product> results;
         private Total total;
 
