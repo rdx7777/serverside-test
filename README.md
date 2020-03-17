@@ -7,7 +7,7 @@ Application is licensed by [MIT](https://opensource.org/licenses/mit-license.php
 
 ## Tech/frameworks used ##
 
-<img src="https://whirly.pl/wp-content/uploads/2017/05/spring.png" width="200"><img src="http://yaqzi.pl/wp-content/uploads/2016/12/apache_maven.png" width="200"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Mockito_Logo.png" width="200"><img src="https://shiftkeylabs.ca/wp-content/uploads/2017/02/JUnit_logo.png" width="200"><img src="https://jules-grospeiller.fr/media/logo_competences/lang/json.png" width="200">
+<img src="https://whirly.pl/wp-content/uploads/2017/05/spring.png" width="200"><img src="http://yaqzi.pl/wp-content/uploads/2016/12/apache_maven.png" width="200"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Mockito_Logo.png" width="200"><img src="https://www.admfactory.com/images/logos/junit-400.jpg" width="200"><img src="https://jules-grospeiller.fr/media/logo_competences/lang/json.png" width="200">
 
 ## Instalation ##
 
