@@ -39,7 +39,7 @@ class ApplicationControllerTest {
     @Test
     public void shouldReturnData() throws Exception {
         WebsiteDataPart dataPart = WebsiteDataPartGenerator.getRandomWebsiteDataPart();
-        String address = WordGenerator.getRandomWord();
+        String address = "https://www.sainsburys.co.uk/";
         when(applicationService.getData(address)).thenReturn(Optional.of(dataPart));
 
         String url = String.format("/?address=%s", address);
@@ -54,7 +54,7 @@ class ApplicationControllerTest {
     }
 
     @Test
-    void shouldReturnNotFoundStatusDuringGettingDataWhenProvidedAddressIsIncorrect() throws Exception {
+    void shouldReturnNotFoundStatusDuringGettingDataWhenProvidedAddressIsInvalid() throws Exception {
         String address = WordGenerator.getRandomWord();
 
         String url = String.format("/?address=%s", address);
@@ -62,6 +62,22 @@ class ApplicationControllerTest {
         mockMvc.perform(get(url)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.message").value("Attempt to get website by providing invalid address."))
+            .andExpect(status().isNotFound());
+
+        verify(applicationService, never()).getData(address);
+    }
+
+    @Test
+    void shouldReturnNotFoundStatusDuringGettingDataWhenProvidedAddressIsIncorrect() throws Exception {
+        String address = "https://www.sainsburys.co.uk/";
+
+        String url = String.format("/?address=%s", address);
+
+        mockMvc.perform(get(url)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.message").value("Attempt to get website data by providing incorrect address for this application."))
             .andExpect(status().isNotFound());
 
         verify(applicationService).getData(address);
@@ -69,7 +85,7 @@ class ApplicationControllerTest {
 
     @Test
     void shouldReturnNotAcceptableStatusDuringGettingDataWithNotSupportedMediaType() throws Exception {
-        String address = WordGenerator.getRandomWord();
+        String address = "https://www.sainsburys.co.uk/";
 
         String url = String.format("/?address=%s", address);
 
@@ -82,7 +98,7 @@ class ApplicationControllerTest {
 
     @Test
     void shouldReturnInternalServerErrorDuringGettingDataWhenSomethingWentWrongOnServer() throws Exception {
-        String address = WordGenerator.getRandomWord();
+        String address = "https://www.sainsburys.co.uk/";
         when(applicationService.getData(address)).thenThrow(new ServiceOperationException());
 
         String url = String.format("/?address=%s", address);
