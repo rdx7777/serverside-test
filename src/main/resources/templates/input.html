@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Serverside test</title>
+</head>
+<body>
+<form th:action="@{/console/json}" method="post">
+    <input type="text" placeholder="enter http address" th:value="${address}" th:name="address">
+    <input type="submit" value="Click"/>
+</form>
+</body>
+</html>
