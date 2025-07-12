@@ -19,7 +19,7 @@
 		<junit-jupiter.version>5.6.0</junit-jupiter.version>
 		<mockito.version>3.3.0</mockito.version>
 		<jsoup.version>1.13.1</jsoup.version>
-		<commons-lang3.version>3.9</commons-lang3.version>
+		<commons-lang3.version>3.18.0</commons-lang3.version>
 		<jackson-databind.version>2.10.3</jackson-databind.version>
 		<lombok.version>1.18.10</lombok.version>
 		<commons-validator.version>1.6</commons-validator.version>
